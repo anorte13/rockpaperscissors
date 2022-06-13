@@ -1,9 +1,22 @@
 <script>
-    function computerPlay(choice){
-        const items = ["Rock", "Paper", "Scissors"];
+    const playerSelection = "Rock";                                //This is the players choice and it stays constant.
+    let items = ["Rock", "Paper", "Scissors"];                    //Global variables for comouter choices.
 
-        const random = Math.floor(Math.random()*items.length);
-        console.log(random,items[random]);
+    function computerPlay(items){                                 // a function that randomly selects a 'choice' from an array.
+        return items[Math.floor(Math.random()*items.length)];
     }
-    computerPlay();
+    const computerSelection = computerPlay(items);                //Stores the return value form computerPlay() into computerSelection .
+  
+    function playRound(playerSelection, computerSelection){               //This takes varibles taken from computerSelection and playerSelection
+        if (playerSelection === 'Rock' && computerSelection === 'Rock'){   //Compares their strings and outputs a response based on the results. 
+            console.log('Its a tie!');
+        }
+        else if (computerSelection === 'Paper' && playerSelection === 'Rock'){
+            console.log('You lose! Paper beats rock!');
+        }
+        else if(computerSelection === "Scissors" && playerSelection === 'Rock'){
+            console.log('You win, rock beats paper');
+        }
+        }
+    playRound(playerSelection, computerSelection);
 </script>
