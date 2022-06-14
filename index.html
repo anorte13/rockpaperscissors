@@ -9,51 +9,55 @@
     
     <p></p>
   </body>
-
  <script>
     const para = document.querySelector('p');
-    let playerSelection = prompt("Please enter a choice (Rock, Paper, Scissors): ");
-    let items = ["Rock", "Paper", "Scissors"];                                    //Global variables for comouter choices.
-    
-    function computerPlay(items){                                                 //A function that randomly selects a 'choice' from an array.
-        return items[Math.floor(Math.random()*items.length)];
-    }
-    const computerSelection = computerPlay(items);                               //Stores the return value form computerPlay() into computerSelection .
-    
-    function playRound(playerSelection, computerSelection){                     //This takes varibles taken from computerSelection and playerSelection
-        let computerWins;
-        let playerWins;
-        if (playerSelection === computerSelection){
-                    para.textContent = 'You tied!'
-                    computerWins = 0;
-                    playerWins = 0;
-                }
-        else if (playerSelection === 'Rock' && computerSelection === 'Paper'){
-                    para.textContent = 'Computer Wins, Paper beats Rock!';
-                    computerWins++;
-                }
-        else if(playerSelection === 'Paper' && computerSelection === "Scissors"){
-                    para.textContent = 'Computer Wins, Scissors beats Paper!';
-                    computerWins++;
-                }
-        else if(playerSelection === 'Scissors' && computerSelection === 'Rock'){
-                    para.textContent = 'Computer Wins, Rock beats Scissors!';
-                    computerWins++;
-                }
-        else if(playerSelection === 'Rock' && computerSelection === 'Scissors'){
-                    para.textContent == 'You win, Rock beats Scissors!';
-                    playerWins++;
-                }
-        else if (playerSelection === 'Paper' && computerSelection === 'Rock'){
-                    para.textContent = 'You win, Paper beats Rock!';
-                    playerWins++;
-                }
-        else if (playerSelection === 'Scissors' && computerSelection === 'Paper'){
-                    para.textContent = 'You win, Scissors beats Paper!';
-                    playerWins++;
-                }
-    }
-    playRound(playerSelection, computerSelection);
+    let computerWins = 0;
+    let playerWins = 0;
+
+        let choice;
+        function userPlay(choice) {
+            return choice = prompt("Please enter a choice (Rock, Paper, Scissors): ");
+        }
+        let playerSelection = userPlay(choice);
+
+        let items = ["Rock", "Paper", "Scissors"];                                    
+        function computerPlay(items) {                                                 
+            return items[Math.floor(Math.random()*items.length)];
+        }
+        let computerSelection = computerPlay(items);                               
+        
+        function playRound(playerSelection, computerSelection) {                     
+            if (playerSelection === computerSelection){
+                        para.textContent = 'You tied!'
+                    }
+            else if (playerSelection === 'Rock' && computerSelection === 'Paper'){
+                        para.textContent = 'Computer selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer wins, Paper beats Rock'; 
+                        return computerWins++; 
+                    } 
+            else if (playerSelection === 'Paper' && computerSelection === "Scissors"){
+                        para.textContent = 'Computer Selected: '+ computerSelection +'. You selected:' + playerSelection +'. Computer Wins, Scissors beats Paper!';   
+                        return computerWins++;        
+                    }
+            else if (playerSelection === 'Scissors' && computerSelection === 'Rock'){
+                        para.textContent = 'Computer Selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer Wins, Rock beats Scissors!';  
+                        return computerWins++;             
+                    }
+            else if (playerSelection === 'Rock' && computerSelection === 'Scissors'){
+                        para.textContent = 'Computer Selected: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Rock beats Scissors!';     
+                        return playerWins++;             
+                    }
+            else if (playerSelection === 'Paper' && computerSelection === 'Rock'){
+                        para.textContent = 'Computer Seleted: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Paper beats Rock!'; 
+                        return playerWins++;
+                    }
+            else if (playerSelection === 'Scissors' && computerSelection === 'Paper'){
+                        para.textContent = 'Computer Selected: ' + computerSelection + '. You selected: '+ playerSelection +'. You win, Scissors beats Paper!';
+                        return playerWins++;
+                    }
+        }
+    playRound(playerSelection,computerSelection);
+    console.log("Computer Wins: " + computerWins);
+    console.log("Player Wins: " + playerWins);
 </script>
 </body>
 </html>
