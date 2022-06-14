@@ -1,22 +1,59 @@
-<script>
-    const playerSelection = "Rock";                                //This is the players choice and it stays constant.
-    let items = ["Rock", "Paper", "Scissors"];                    //Global variables for comouter choices.
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <h2>Welcome to Rock, Paper Scissors</h2>
+    
+    <p></p>
+  </body>
 
-    function computerPlay(items){                                 // a function that randomly selects a 'choice' from an array.
+ <script>
+    const para = document.querySelector('p');
+    let playerSelection = prompt("Please enter a choice (Rock, Paper, Scissors): ");
+    let items = ["Rock", "Paper", "Scissors"];                                    //Global variables for comouter choices.
+    
+    function computerPlay(items){                                                 //A function that randomly selects a 'choice' from an array.
         return items[Math.floor(Math.random()*items.length)];
     }
-    const computerSelection = computerPlay(items);                //Stores the return value form computerPlay() into computerSelection .
-  
-    function playRound(playerSelection, computerSelection){               //This takes varibles taken from computerSelection and playerSelection
-        if (playerSelection === 'Rock' && computerSelection === 'Rock'){   //Compares their strings and outputs a response based on the results. 
-            console.log('Its a tie!');
-        }
-        else if (computerSelection === 'Paper' && playerSelection === 'Rock'){
-            console.log('You lose! Paper beats rock!');
-        }
-        else if(computerSelection === "Scissors" && playerSelection === 'Rock'){
-            console.log('You win, rock beats paper');
-        }
-        }
+    const computerSelection = computerPlay(items);                               //Stores the return value form computerPlay() into computerSelection .
+    
+    function playRound(playerSelection, computerSelection){                     //This takes varibles taken from computerSelection and playerSelection
+        let computerWins;
+        let playerWins;
+        if (playerSelection === computerSelection){
+                    para.textContent = 'You tied!'
+                    computerWins = 0;
+                    playerWins = 0;
+                }
+        else if (playerSelection === 'Rock' && computerSelection === 'Paper'){
+                    para.textContent = 'Computer Wins, Paper beats Rock!';
+                    computerWins++;
+                }
+        else if(playerSelection === 'Paper' && computerSelection === "Scissors"){
+                    para.textContent = 'Computer Wins, Scissors beats Paper!';
+                    computerWins++;
+                }
+        else if(playerSelection === 'Scissors' && computerSelection === 'Rock'){
+                    para.textContent = 'Computer Wins, Rock beats Scissors!';
+                    computerWins++;
+                }
+        else if(playerSelection === 'Rock' && computerSelection === 'Scissors'){
+                    para.textContent == 'You win, Rock beats Scissors!';
+                    playerWins++;
+                }
+        else if (playerSelection === 'Paper' && computerSelection === 'Rock'){
+                    para.textContent = 'You win, Paper beats Rock!';
+                    playerWins++;
+                }
+        else if (playerSelection === 'Scissors' && computerSelection === 'Paper'){
+                    para.textContent = 'You win, Scissors beats Paper!';
+                    playerWins++;
+                }
+    }
     playRound(playerSelection, computerSelection);
 </script>
+</body>
+</html>
