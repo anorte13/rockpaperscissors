@@ -6,58 +6,62 @@
   </head>
   <body>
     <h2>Welcome to Rock, Paper Scissors</h2>
-    
-    <p></p>
+    <input type="text" id="select2"/>
+    <button onclick="playRound()">Enter</button>
+    <p id="result"></p>
+    <p>Here is the current score: </p>
+    <p>Computer wins: <span id="score"></span></p>
+    <p>Player wins: <span id="score2"></span></p> 
   </body>
  <script>
-    const para = document.querySelector('p');
     let computerWins = 0;
     let playerWins = 0;
+  
+    let items = ["Rock", "Paper", "Scissors"]; 
 
-        let choice;
-        function userPlay(choice) {
-            return choice = prompt("Please enter a choice (Rock, Paper, Scissors): ");
-        }
-        let playerSelection = userPlay(choice);
-
-        let items = ["Rock", "Paper", "Scissors"];                                    
+        function userPlay() {
+            let choice = document.getElementById('select2').value;
+            return choice;
+        }                       
         function computerPlay(items) {                                                 
             return items[Math.floor(Math.random()*items.length)];
         }
-        let computerSelection = computerPlay(items);                               
-        
-        function playRound(playerSelection, computerSelection) {                     
+           
+
+        function playRound() {    
+            let playerSelection = userPlay();  
+            let computerSelection = computerPlay(items);
+
             if (playerSelection === computerSelection){
-                        para.textContent = 'You tied!'
+                        document.getElementById("result").innerHTML = 'You tied!';
                     }
             else if (playerSelection === 'Rock' && computerSelection === 'Paper'){
-                        para.textContent = 'Computer selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer wins, Paper beats Rock'; 
-                        return computerWins++; 
+                        document.getElementById("result").innerHTML = 'Computer selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer wins, Paper beats Rock'; 
+                        computerWins++; 
                     } 
             else if (playerSelection === 'Paper' && computerSelection === "Scissors"){
-                        para.textContent = 'Computer Selected: '+ computerSelection +'. You selected:' + playerSelection +'. Computer Wins, Scissors beats Paper!';   
-                        return computerWins++;        
+                        document.getElementById("result").innerHTML = 'Computer Selected: '+ computerSelection +'. You selected:' + playerSelection +'. Computer Wins, Scissors beats Paper!';   
+                        computerWins++;        
                     }
             else if (playerSelection === 'Scissors' && computerSelection === 'Rock'){
-                        para.textContent = 'Computer Selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer Wins, Rock beats Scissors!';  
-                        return computerWins++;             
+                        document.getElementById("result").innerHTML = 'Computer Selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer Wins, Rock beats Scissors!';  
+                    computerWins++;             
                     }
             else if (playerSelection === 'Rock' && computerSelection === 'Scissors'){
-                        para.textContent = 'Computer Selected: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Rock beats Scissors!';     
-                        return playerWins++;             
+                       document.getElementById("result").innerHTML = 'Computer Selected: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Rock beats Scissors!';     
+                    playerWins++;             
                     }
             else if (playerSelection === 'Paper' && computerSelection === 'Rock'){
-                        para.textContent = 'Computer Seleted: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Paper beats Rock!'; 
-                        return playerWins++;
+                       document.getElementById("result").innerHTML = 'Computer Seleted: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Paper beats Rock!'; 
+                    playerWins++;
                     }
             else if (playerSelection === 'Scissors' && computerSelection === 'Paper'){
-                        para.textContent = 'Computer Selected: ' + computerSelection + '. You selected: '+ playerSelection +'. You win, Scissors beats Paper!';
-                        return playerWins++;
+                      document.getElementById("result").innerHTML = 'Computer Selected: ' + computerSelection + '. You selected: '+ playerSelection +'. You win, Scissors beats Paper!';
+                     playerWins++;
                     }
+            document.getElementById("score").innerHTML = computerWins;
+            document.getElementById("score2").innerHTML = playerWins;
         }
-    playRound(playerSelection,computerSelection);
-    console.log("Computer Wins: " + computerWins);
-    console.log("Player Wins: " + playerWins);
-</script>
-</body>
+        playRound();
+    </script>
 </html>
