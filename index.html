@@ -6,16 +6,19 @@
   </head>
   <body>
     <h2>Welcome to Rock, Paper Scissors</h2>
+    <h3>Please enter either (Rock, Paper or Scissors)</h3>
     <input type="text" id="select2"/>
-    <button onclick="playRound()">Enter</button>
+    <button onclick="game()">Enter</button>
     <p id="result"></p>
     <p>Here is the current score: </p>
     <p>Computer wins: <span id="score"></span></p>
     <p>Player wins: <span id="score2"></span></p> 
+    <p id="final"></p>
   </body>
  <script>
     let computerWins = 0;
     let playerWins = 0;
+    
   
     let items = ["Rock", "Paper", "Scissors"]; 
 
@@ -29,39 +32,55 @@
            
 
         function playRound() {    
-            let playerSelection = userPlay();  
-            let computerSelection = computerPlay(items);
+            let playerSelection = userPlay().toLowerCase();
+            let computerSelection = computerPlay(items).toLowerCase();
 
             if (playerSelection === computerSelection){
                         document.getElementById("result").innerHTML = 'You tied!';
                     }
-            else if (playerSelection === 'Rock' && computerSelection === 'Paper'){
+            else if (playerSelection === 'rock' && computerSelection === 'paper'){
                         document.getElementById("result").innerHTML = 'Computer selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer wins, Paper beats Rock'; 
                         computerWins++; 
                     } 
-            else if (playerSelection === 'Paper' && computerSelection === "Scissors"){
+            else if (playerSelection === 'paper' && computerSelection === "scissors"){
                         document.getElementById("result").innerHTML = 'Computer Selected: '+ computerSelection +'. You selected:' + playerSelection +'. Computer Wins, Scissors beats Paper!';   
                         computerWins++;        
                     }
-            else if (playerSelection === 'Scissors' && computerSelection === 'Rock'){
+            else if (playerSelection === 'scissors' && computerSelection === 'rock'){
                         document.getElementById("result").innerHTML = 'Computer Selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer Wins, Rock beats Scissors!';  
                     computerWins++;             
                     }
-            else if (playerSelection === 'Rock' && computerSelection === 'Scissors'){
+            else if (playerSelection === 'rock' && computerSelection === 'scissors'){
                        document.getElementById("result").innerHTML = 'Computer Selected: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Rock beats Scissors!';     
                     playerWins++;             
                     }
-            else if (playerSelection === 'Paper' && computerSelection === 'Rock'){
+            else if (playerSelection === 'paper' && computerSelection === 'ock'){
                        document.getElementById("result").innerHTML = 'Computer Seleted: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Paper beats Rock!'; 
                     playerWins++;
                     }
-            else if (playerSelection === 'Scissors' && computerSelection === 'Paper'){
+            else if (playerSelection === 'scissors' && computerSelection === 'paper'){
                       document.getElementById("result").innerHTML = 'Computer Selected: ' + computerSelection + '. You selected: '+ playerSelection +'. You win, Scissors beats Paper!';
                      playerWins++;
                     }
             document.getElementById("score").innerHTML = computerWins;
             document.getElementById("score2").innerHTML = playerWins;
         }
-        playRound();
+    function game() {
+            
+            playRound();
+            if (playerWins == 5){
+            document.getElementById('final'),innerHTML = 'YOU WIN THE GAME!'
+            }
+            else if (computerWins == 5){
+            document.getElementById('final'),innerHTML = 'COMPUTER WINS THE GAME'
+            }
+            else if(playerWins > computerWins){
+            document.getElementById('final'),innerHTML = 'YOU WIN THE GAME!'
+            }
+            else if(computerWins > playerWins){
+            document.getElementById('final'),innerHTML = 'COMPUTER WINS THE GAME'
+            }
+        }
+    game();
     </script>
 </html>
