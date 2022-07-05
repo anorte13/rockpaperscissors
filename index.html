@@ -9,22 +9,21 @@
     <button id="Rock">Rock</button>
     <button id="Paper">Paper</button>
     <button id="Scissors">Scissors</button>
-    <p>Computer wins: <span id="score"></span></p>
-    <p>Player wins: <span id="score2"></span></p> 
-    <p>Round: <span id="final"></span></p>
-    <p>You chose: <span id="results"></span> </p>
-    <p>Computer chose: <span id="results2"></span> </p>
+    <p>Round: <span id="round"></span></p>
+    <p>You chose: <span id="playerresults"></span> </p>
+    <p>Computer chose: <span id="cpuresults"></span> </p>
     <p id="result"></p>
+    <p>Computer wins: <span id="cpuscore"></span></p>
+    <p>Player wins: <span id="playerscore"></span></p> 
   </body>
  <script>
     let computerWins = 0;
     let playerWins = 0;
-    let totalWins = 0;
+    let totalRounds = 0;
     let playerChoice = '';
     let computerChoice = '';
     let items = ["Rock", "Paper", "Scissors"]; 
     const buttons = document.querySelectorAll('button');
-
     function computerPlay(items) {                                                 
       return items[Math.floor(Math.random()*items.length)];
         }
@@ -34,18 +33,30 @@
         }
         else if (user === 'Rock' && cpu === 'Paper' || user === 'Paper' && cpu === 'Scissors' || user === 'Scissors' && cpu === 'Rock') {
             document.getElementById('result').textContent = 'CPU Wins.'
+            computerWins++;
         }
-        else document.getElementById('result').textContent = 'You win.'
-    
+        else {
+        document.getElementById('result').textContent = 'You win.'
+        playerWins++;
+        }
+    totalRounds++;
     }
-    
      buttons.forEach((button) => {
         button.addEventListener('click', () => {
             playerChoice = button.id;
             computerChoice = computerPlay(items);
             playRound(playerChoice, computerChoice);
-            document.getElementById('results').textContent = playerChoice;
-            document.getElementById('results2').textContent = computerChoice;
+            if(totalRounds === 5){
+                alert('Game Over!');
+                buttons.forEach((button) => {
+                     button.setAttribute('disabled', 'true')
+                     });
+            }
+            document.getElementById('playerresults').textContent = playerChoice;
+            document.getElementById('cpuresults').textContent = computerChoice;
+            document.getElementById('round').textContent = totalRounds;
+            document.getElementById('cpuscore').textContent = computerWins;
+            document.getElementById('playerscore').textContent = playerWins;
         });
     });
     </script>
