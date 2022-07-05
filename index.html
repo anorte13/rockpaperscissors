@@ -72,23 +72,5 @@
             document.getElementById("score2").innerHTML = playerWins;
             document.getElementById("final").innerHTML = totalWins;
         }
-    function game() {
-    playRound();
-    let rounds = totalWins;
-    if(rounds == 5){
-        alert('Game Over!');
-        document.getElementById('end').disabled = true;
-        if (computerWins > playerWins){
-            document.getElementById('result2').innerHTML = 'Computer wins with a score of: ' + computerWins + '!';
-        }
-        else if (playerWins > computerWins){
-            document.getElementById('result2').innerHTML = 'You win with a score of: ' + playerWins + '!';
-        }
-        else {
-            document.getElementById('result2').innerHTML = "Looks like you tied!";
-        }
-        }
-      }
-    game();
     </script>
 </html>
