@@ -6,89 +6,60 @@
   </head>
   <body>
     <h2>Welcome to Rock, Paper Scissors</h2>
-    <h3>Please enter either (Rock, Paper or Scissors)</h3>
-    <input type="text" id="select2"/>
-    <button id="end" onclick="game()">Enter</button>
+    <button id="Rock">Rock</button>
+    <button id="Paper">Paper</button>
+    <button id="Scissors">Scissors</button>
+
+    <p>Round: <span id="round"></span></p>
+    <p>You chose: <span id="playerresults"></span> </p>
+    <p>Computer chose: <span id="cpuresults"></span> </p>
     <p id="result"></p>
-    <p>Computer wins: <span id="score"></span></p>
-    <p>Player wins: <span id="score2"></span></p> 
-    <p>Round: <span id="final"></span></p>
-    <p>Winner: <span id="result2"></span></p>
+    <p>Computer wins: <span id="cpuscore"></span></p>
+    <p>Player wins: <span id="playerscore"></span></p> 
   </body>
  <script>
     let computerWins = 0;
     let playerWins = 0;
-    let totalWins = 0;
-    
-  
+    let totalRounds = 0;
+    let playerChoice = '';
+    let computerChoice = '';
     let items = ["Rock", "Paper", "Scissors"]; 
-
-        function userPlay() {
-            let choice = document.getElementById('select2').value;
-            return choice;
-        }                   
-        function computerPlay(items) {                                                 
-            return items[Math.floor(Math.random()*items.length)];
+    
+    const buttons = document.querySelectorAll('button');
+    function computerPlay(items) {                                                 
+      return items[Math.floor(Math.random()*items.length)];
         }
-        function playRound() {    
-            let playerSelection = userPlay().toLowerCase();
-            let computerSelection = computerPlay(items).toLowerCase();
-
-            if (playerSelection === computerSelection){
-                        document.getElementById("result").innerHTML = 'You tied!';
-                        totalWins++;
-                    }
-            else if (playerSelection === 'rock' && computerSelection === 'paper'){
-                        document.getElementById("result").innerHTML = 'Computer selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer wins, Paper beats Rock'; 
-                        computerWins++; 
-                        totalWins++;
-                    } 
-            else if (playerSelection === 'paper' && computerSelection === "scissors"){
-                        document.getElementById("result").innerHTML = 'Computer Selected: '+ computerSelection +'. You selected:' + playerSelection +'. Computer Wins, Scissors beats Paper!';   
-                        computerWins++;  
-                        totalWins++;      
-                    }
-            else if (playerSelection === 'scissors' && computerSelection === 'rock'){
-                        document.getElementById("result").innerHTML = 'Computer Selected: '+ computerSelection +'. You selected: ' + playerSelection +'. Computer Wins, Rock beats Scissors!';  
-                        computerWins++;
-                        totalWins;  
-                    }
-            else if (playerSelection === 'rock' && computerSelection === 'scissors'){
-                       document.getElementById("result").innerHTML = 'Computer Selected: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Rock beats Scissors!';     
-                       playerWins++;
-                       totalWins++;             
-                    }
-            else if (playerSelection === 'paper' && computerSelection === 'rock'){
-                       document.getElementById("result").innerHTML = 'Computer Seleted: ' + computerSelection + '. You selected: ' + playerSelection +'. You win, Paper beats Rock!'; 
-                       playerWins++;
-                       totalWins++;
-                    }
-            else if (playerSelection === 'scissors' && computerSelection === 'paper'){
-                      document.getElementById("result").innerHTML = 'Computer Selected: ' + computerSelection + '. You selected: '+ playerSelection +'. You win, Scissors beats Paper!';
-                      playerWins++;
-                      totalWins++;
-                    }
-            document.getElementById("score").innerHTML = computerWins;
-            document.getElementById("score2").innerHTML = playerWins;
-            document.getElementById("final").innerHTML = totalWins;
+    function playRound(user, cpu){
+        if (user === cpu){
+            document.getElementById('result').textContent = 'It is a tie.'
         }
-    function game() {
-    playRound();
-    let rounds = totalWins;
-    if(rounds == 5){
-        alert('Game Over!');
-        document.getElementById('end').disabled = true;
-        if (computerWins > playerWins){
-            document.getElementById('result2').innerHTML = 'Computer wins with a score of: ' + computerWins + '!';
-        }
-        else if (playerWins > computerWins){
-            document.getElementById('result2').innerHTML = 'You win with a score of: ' + playerWins + '!';
+        else if (user === 'Rock' && cpu === 'Paper' || user === 'Paper' && cpu === 'Scissors' || user === 'Scissors' && cpu === 'Rock') {
+            document.getElementById('result').textContent = 'CPU Wins.'
+            computerWins++;
         }
         else {
-            document.getElementById('result2').innerHTML = "Looks like you tied!";
+        document.getElementById('result').textContent = 'You win.'
+        playerWins++;
         }
-        }
-      }
-    game();
+    totalRounds++;
+    }
+     buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            playerChoice = button.id;
+            computerChoice = computerPlay(items);
+            playRound(playerChoice, computerChoice);
+            if(totalRounds === 5){
+                alert('Game Over!');
+                buttons.forEach((button) => {
+                     button.setAttribute('disabled', 'true')
+                     });
+            }
+            document.getElementById('playerresults').textContent = playerChoice;
+            document.getElementById('cpuresults').textContent = computerChoice;
+            document.getElementById('round').textContent = totalRounds;
+            document.getElementById('cpuscore').textContent = computerWins;
+            document.getElementById('playerscore').textContent = playerWins;
+        });
+    });
     </script>
 </html>
